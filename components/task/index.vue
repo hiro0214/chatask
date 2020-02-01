@@ -12,7 +12,7 @@
 .task-container {
   width:60%;
   height:100%;
-  background:rgb(183, 183, 255);
+  border-right:solid 1px;
 }
 
 </style>
