@@ -1,18 +1,28 @@
 <template>
   <section>
-    <p>top</p>
-    <ul>
-      <li v-for="task in $store.state.task.tasks" :key="task.id">{{ task.title }}</li>
-    </ul>
+    <taskComp />
+    <chatComp />
   </section>
 </template>
 
 <style lang="scss" scoped>
 
+section {
+  height:100%;
+  display:flex;
+}
+
 </style>
 
 <script>
+import taskComp from '~/components/task/index.vue'
+import chatComp from '~/components/chat/index.vue'
+
 export default {
+  components: {
+    taskComp,
+    chatComp
+  },
   created () {
     this.$store.dispatch('task/init')
   }
