@@ -2,6 +2,7 @@
   <div class="chat-form">
     <form action="" ref="chat-form">
       <div class="chat-form-top">
+
         <div>
           <label for="img_upload">
             <v-icon size="28">panorama</v-icon>
@@ -14,15 +15,27 @@
           </template>
           <input id="img_upload" type="file" @change="imgChose">
         </div>
+
         <div>
           <v-btn icon @click="textBold">
             <v-icon size="32">format_bold</v-icon>
           </v-btn>
-          <v-btn icon @click="textColor">
-            <v-icon>create</v-icon>
-          </v-btn>
+          <v-menu top>
+            <template v-slot:activator="{ on: {click} }">
+              <v-btn icon @click="click">
+                <v-icon>create</v-icon>
+              </v-btn>
+            </template>
+            <v-list class="py-0" width="70">
+              <v-list-item v-for="(item, index) in coloritems" :key="index" @click="textColor(index)" class="px-1">
+                <v-list-item-content :class=item></v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </div>
+
       </div>
+
       <div class="chat-form-bottom">
         <input ref="form" type="text" name="message" placeholder="チャットを入力" v-model="send.message" class="form-message">
         <button @click="submit" class="form-send">送信</button>
@@ -81,9 +94,11 @@ export default {
     return {
       send: {
         message: '',
-        img: ''
+        img: '',
+        color: '',
       },
       decoInfo: false,
+      coloritems : ['red', 'blue', 'green', 'orange', 'purple']
     }
   },
   methods: {
@@ -92,7 +107,8 @@ export default {
       const sendData = {
         message: this.send.message,
         img: this.send.img,
-        textbold: this.decoInfo
+        textbold: this.decoInfo,
+        textcolor: this.send.color
       }
       console.log(sendData)
       this.formReset();
@@ -106,19 +122,27 @@ export default {
     textBold () {
       if (this.decoInfo == true) {
         this.decoInfo = false
-        this.$refs.form.style.fontWeight = 200
+        this.$refs.form.style.fontWeight = "normal"
       } else {
         this.decoInfo = true
         this.$refs.form.style.fontWeight = 600
       }
     },
-    textColor () {
-
+    textColor (i) {
+      this.send.color = this.coloritems[i]
+      this.$refs.form.style.color = this.coloritems[i]
     },
     formReset () {
       this.send.message = ''
       this.send.img = ''
-      this.deco = ''
+      if (this.decoInfo == true) {
+        this.decoInfo = false
+        this.$refs.form.style.fontWeight = "normal"
+      }
+      if (this.send.color) {
+        this.send.color = ''
+        this.$refs.form.style.color = null
+      }
     }
   }
 }

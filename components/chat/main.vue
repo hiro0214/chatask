@@ -3,7 +3,7 @@
     <ul>
       <li>
         <div class="chat-main-top">
-          <p><v-icon>textsms</v-icon>　田中</p>
+          <p><v-icon size="16">textsms</v-icon>田中</p>
           <span>2020年 2月 3日 (月) 12:34</span>
         </div>
         <div class="chat-main-bottom">
@@ -43,7 +43,6 @@
     border:solid 1px gray;
     padding:20px 30px;
     overflow:scroll;
-    // -webkit-overflow-scrolling:touch;
     ul {
       list-style-type: none;
       padding:0;
@@ -62,6 +61,9 @@
       span {
         color:gray;
         font-size:14px;
+      }
+      i {
+        margin-right:10px;
       }
     }
     &-bottom {
