@@ -9,7 +9,9 @@
 
 section {
   height:100%;
+  padding:30px;
   display:flex;
+  background:rgb(235, 254, 255);
 }
 
 </style>
