@@ -25,10 +25,12 @@ export default {
     taskComp,
     chatComp
   },
-  created () {
-    if (this.$store.state.user.loginUser == '') {
-      this.$router.push('/auth')
-    }
+  mounted () {
+    setTimeout(() => {
+      if (this.$store.state.user.loginUser == '') {
+        this.$router.push('/auth')
+      }
+    }, 0)
   }
 }
 </script>

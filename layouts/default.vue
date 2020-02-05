@@ -13,7 +13,7 @@
         <v-btn icon color="white">
             <v-icon>group_add</v-icon>
         </v-btn>
-        <v-btn icon color="white">
+        <v-btn icon color="white" to="/user">
           <v-icon>house</v-icon>
         </v-btn>
       </v-toolbar>
@@ -22,7 +22,3 @@
     <nuxt />
   </v-app>
 </template>
-
-<style scoped lang="scss">
-
-</style>

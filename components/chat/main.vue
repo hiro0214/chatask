@@ -3,7 +3,7 @@
     <ul>
       <li v-for="(message,index) in $store.state.chat.messages" :key="index">
         <div class="chat-main-top">
-          <p><v-icon size="15">textsms</v-icon>田中</p>
+          <p><v-icon size="15">textsms</v-icon>{{ message.user.name }}</p>
           <span>{{ message.created_at }}</span>
         </div>
         <div class="chat-main-bottom">

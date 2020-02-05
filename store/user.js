@@ -7,6 +7,9 @@ export const state = {
 export const mutations = {
   setUser(state, payload) {
     state.loginUser = payload
+  },
+  signOut(state) {
+    state.loginUser = ''
   }
 }
 
@@ -39,5 +42,8 @@ export const actions = {
       .catch((err) => {
         console.log(err)
       })
+  },
+  signOut({ commit }) {
+    commit('signOut')
   }
 }
