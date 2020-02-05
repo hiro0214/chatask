@@ -26,7 +26,9 @@ export default {
     chatComp
   },
   created () {
-    this.$store.dispatch('task/init')
+    if (this.$store.state.user.loginUser == '') {
+      this.$router.push('/auth')
+    }
   }
 }
 </script>

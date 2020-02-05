@@ -1,7 +1,7 @@
 <template>
   <div class="index-page">
     <h1>Chatask</h1>
-    <nuxt-link to="/top">
+    <nuxt-link to="/auth">
       <v-btn>ENTER</v-btn>
     </nuxt-link>
   </div>
