@@ -97,7 +97,7 @@ export default {
         img: '',
         color: '',
       },
-      decoInfo: false,
+      decoInfo: "false",
       coloritems : ['red', 'blue', 'green', 'orange', 'purple']
     }
   },
@@ -105,12 +105,14 @@ export default {
     submit (e) {
       e.preventDefault();
       const sendData = {
-        message: this.send.message,
-        img: this.send.img,
-        textbold: this.decoInfo,
-        textcolor: this.send.color
+        user_id: 1,
+        group_id: 1,
+        text: this.send.message,
+        text_bold: this.decoInfo,
+        text_color: this.send.color
+        // img: this.send.img,
       }
-      console.log(sendData)
+      this.$store.dispatch('chat/createMessage', sendData)
       this.formReset();
     },
     imgChose (e) {
@@ -120,11 +122,11 @@ export default {
       this.send.img = ''
     },
     textBold () {
-      if (this.decoInfo == true) {
-        this.decoInfo = false
+      if (this.decoInfo == "true") {
+        this.decoInfo = "false"
         this.$refs.form.style.fontWeight = "normal"
       } else {
-        this.decoInfo = true
+        this.decoInfo = "true"
         this.$refs.form.style.fontWeight = 600
       }
     },
@@ -135,8 +137,8 @@ export default {
     formReset () {
       this.send.message = ''
       this.send.img = ''
-      if (this.decoInfo == true) {
-        this.decoInfo = false
+      if (this.decoInfo == "true") {
+        this.decoInfo = "false"
         this.$refs.form.style.fontWeight = "normal"
       }
       if (this.send.color) {

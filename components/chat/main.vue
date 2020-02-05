@@ -1,31 +1,13 @@
 <template>
   <div class="chat-main">
     <ul>
-      <li>
+      <li v-for="(message,index) in $store.state.chat.messages" :key="index">
         <div class="chat-main-top">
-          <p><v-icon size="16">textsms</v-icon>田中</p>
-          <span>2020年 2月 3日 (月) 12:34</span>
+          <p><v-icon size="15">textsms</v-icon>田中</p>
+          <span>{{ message.created_at }}</span>
         </div>
         <div class="chat-main-bottom">
-          <p>テキストテキスト</p>
-        </div>
-      </li>
-      <li>
-        <div class="chat-main-top">
-          <p>田中</p>
-          <span>2020年 2月 3日 (月) 12:34</span>
-        </div>
-        <div class="chat-main-bottom">
-          <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
-        </div>
-      </li>
-      <li>
-        <div class="chat-main-top">
-          <p>田中</p>
-          <span>2020年 2月 3日 (月) 12:34</span>
-        </div>
-        <div class="chat-main-bottom">
-          <p>テキストテキスト</p>
+          <p :class="(message.text_bold == 'true') ? 'text-bold': ''" :style="{color: message.text_color}">{{ message.text }}</p>
         </div>
       </li>
     </ul>
@@ -75,8 +57,21 @@
         font-size:15px;
         color:rgb(80, 80, 80);
       }
+      .text-bold {
+        font-weight:600;
+      }
     }
   }
 }
 
 </style>
+
+<script>
+export default {
+  methods: {
+    textColor(color) {
+      console.log(color)
+    }
+  }
+}
+</script>

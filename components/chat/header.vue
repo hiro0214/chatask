@@ -4,9 +4,51 @@
       <span>グループ名 :  <b>メルカリチームC</b></span>
     </div>
     <div class="chat-header-info">
-      <v-btn icon>
+      <v-menu>
+        <template v-slot:activator="{ on: {click} }">
+          <v-btn icon @click="click">
+            <v-icon>transform</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="(group, index) in groupList" :key="index" @click="changeGroup(index)" >
+            <v-list-item-content>{{ group }}</v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+      <v-btn icon @click="editDialog = true">
         <v-icon>library_books</v-icon>
       </v-btn>
+
+      <v-dialog v-model="editDialog" max-width="500" persistent>
+        <v-card>
+          <v-card-title class="justify-center font-weight-bold">グループ編集</v-card-title>
+          <v-card-text>
+            <div class="edit-name">
+              <p>グループ名 : <b>メルカリチームC</b></p>
+              <v-btn v-if="groupNameBtn == true" @click="groupNameBtn = false">グループ名を編集する</v-btn>
+              <v-col v-if="groupNameBtn == false">
+                <v-text-field label="新しいグループ名" v-model="newGroupName"></v-text-field>
+              </v-col>
+            </div>
+
+            <div class="edit-member">
+              <p>メンバー : <b>田中</b></p>
+              <v-btn>メンバーを編集する</v-btn>
+            </div>
+          </v-card-text>
+          <v-card-actions :class="`d-flex justify-center`">
+            <v-btn color="error" @click="editDialog = false, groupNameInit()" class="font-weight-bold">
+              キャンセル
+            </v-btn>
+            <v-btn color="success" @click="editSubmit()" class="font-weight-bold">
+              更新
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
     </div>
   </div>
 </template>
@@ -41,4 +83,48 @@
     }
   }
 }
+
+.v-dialog {
+  .edit-name {
+    margin:20px 0 30px;
+    p {
+      margin-bottom:10px;
+    }
+  }
+
+  .edit-member {
+    p {
+      margin-bottom:10px;
+    }
+  }
+}
+
 </style>
+
+<script>
+export default {
+  data () {
+    return {
+      editDialog: false,
+      newGroupName: '',
+      groupNameBtn: true,
+      groupList: ['グループ1', 'グループ2', 'グループ3']
+    }
+  },
+  methods: {
+    changeGroup (i) {
+      alert(this.groupList[i])
+    },
+    groupNameInit () {
+      this.groupNameBtn = true
+      this.newGroupName = ''
+    },
+    editSubmit(){
+      this.editDialog = false
+
+      // コールバック axios post
+      this.groupNameInit();
+    }
+  }
+}
+</script>
