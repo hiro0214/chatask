@@ -11,8 +11,8 @@ export const mutations = {
 }
 
 export const actions = {
-  async initMessage({commit}) {
-    await axios.get('http://localhost:8000/chat_init')
+  async initMessage({ commit }, payload) {
+    await axios.post('http://localhost:8000/chat_init', payload)
       .then((res) => {
         commit('initMessage', res.data)
       })
@@ -23,7 +23,6 @@ export const actions = {
   async createMessage({dispatch}, payload) {
     await axios.post('http://localhost:8000/chat_create', payload)
       .then(() => {
-        dispatch('initMessage')
       })
       .catch((err) => {
         console.log(err)

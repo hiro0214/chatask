@@ -1,6 +1,6 @@
 <template>
   <div class="user-page">
-    <p>ログインユーザー<br>{{ $store.state.user.loginUser }}</p>
+    <p>ログインユーザー<br>{{ currentUser }}</p>
     <v-btn @click="logout">ログアウト</v-btn>
   </div>
 </template>
@@ -15,6 +15,11 @@
 
 <script>
 export default {
+  computed: {
+    currentUser () {
+      return this.$store.state.user.loginUser
+    }
+  },
   methods: {
     logout() {
       this.$store.dispatch('user/signOut')

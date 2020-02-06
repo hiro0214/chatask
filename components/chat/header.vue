@@ -1,7 +1,7 @@
 <template>
   <div class="chat-header">
     <div class="chat-header-title">
-      <span>グループ名 :  <b>メルカリチームC</b></span>
+      <span>グループ名 :  <b>{{ $store.state.group.currentGroup.group_name }}</b></span>
     </div>
     <div class="chat-header-info">
       <v-menu>
@@ -11,8 +11,8 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item v-for="(group, index) in groupList" :key="index" @click="changeGroup(index)" >
-            <v-list-item-content>{{ group }}</v-list-item-content>
+          <v-list-item v-for="group in $store.state.group.groupList" :key="group.id" @click="changeGroup(group)" >
+            <v-list-item-content>{{ group.group_name }}</v-list-item-content>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -108,12 +108,23 @@ export default {
       editDialog: false,
       newGroupName: '',
       groupNameBtn: true,
-      groupList: ['グループ1', 'グループ2', 'グループ3']
     }
   },
+  mounted () {
+    setTimeout(() => {
+      const userId = {
+        user_id: this.$store.state.user.loginUser.id
+      }
+      this.$store.dispatch('group/groupListInit', userId)
+    }, 0)
+  },
   methods: {
-    changeGroup (i) {
-      alert(this.groupList[i])
+    changeGroup (group) {
+      const groupData = {
+        group_id: group.group_id,
+        group_name: group.group_name,
+      }
+      this.$store.dispatch('group/changeGroup', groupData)
     },
     groupNameInit () {
       this.groupNameBtn = true

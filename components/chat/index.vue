@@ -31,9 +31,6 @@ export default {
     chatHeader,
     chatMain,
     chatForm
-  },
-  mounted () {
-    this.$store.dispatch('chat/initMessage')
   }
 }
 </script>

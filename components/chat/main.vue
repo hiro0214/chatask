@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-main">
+  <div id="chat-main" class="chat-main">
     <ul>
       <li v-for="(message,index) in $store.state.chat.messages" :key="index">
         <div class="chat-main-top">
@@ -68,9 +68,33 @@
 
 <script>
 export default {
+  updated () {
+    this.scrollToEnd()
+  },
+  computed: {
+    currentGroup () {
+      return this.$store.state.group.currentGroup
+    }
+  },
   methods: {
     textColor(color) {
       console.log(color)
+    },
+    scrollToEnd() {
+      this.$nextTick(() => {
+        const chatLog = document.getElementById('chat-main')
+        if (!chatLog) return
+        chatLog.scrollTop = chatLog.scrollHeight
+      })
+    }
+  },
+  watch: {
+    currentGroup(val) {
+      const data = {
+        group_id: val.group_id,
+        group_name: val.group_name
+      }
+      this.$store.dispatch('chat/initMessage', data)
     }
   }
 }

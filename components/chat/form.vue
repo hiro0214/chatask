@@ -105,14 +105,20 @@ export default {
     submit (e) {
       e.preventDefault();
       const sendData = {
-        user_id: 1,
-        group_id: 1,
+        user_id: this.$store.state.user.loginUser.id,
+        group_id: this.$store.state.group.currentGroup.group_id,
         text: this.send.message,
         text_bold: this.decoInfo,
         text_color: this.send.color
         // img: this.send.img,
       }
-      this.$store.dispatch('chat/createMessage', sendData)
+      this.$store.dispatch('chat/createMessage', sendData).then(() => {
+        const data = {
+          group_id: this.$store.state.group.currentGroup.group_id
+        }
+        this.$store.dispatch('chat/initMessage', data)
+
+      })
       this.formReset();
     },
     imgChose (e) {
