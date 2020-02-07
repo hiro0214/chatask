@@ -23,6 +23,8 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('user/signOut')
+      this.$store.dispatch('group/signOut')
+      this.$store.dispatch('chat/signOut')
       this.$router.push('/auth')
     }
   }

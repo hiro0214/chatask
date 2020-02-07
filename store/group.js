@@ -11,6 +11,9 @@ export const mutations = {
   },
   changeGroup(state, payload) {
     state.currentGroup = payload
+  },
+  signOut(state) {
+    state.currentGroup = {}
   }
 }
 
@@ -43,5 +46,8 @@ export const actions = {
   },
   changeGroup({ commit }, payload) {
     commit('changeGroup', payload)
+  },
+  signOut({ commit }) {
+    commit('signOut')
   }
 }

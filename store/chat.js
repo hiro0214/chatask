@@ -7,6 +7,9 @@ export const state = {
 export const mutations = {
   initMessage(state, payload) {
     state.messages = payload
+  },
+  signOut(state) {
+    state.messages = []
   }
 }
 
@@ -20,12 +23,15 @@ export const actions = {
         console.log(err)
       })
   },
-  async createMessage({dispatch}, payload) {
+  async createMessage({}, payload) {
     await axios.post('http://localhost:8000/chat_create', payload)
       .then(() => {
       })
       .catch((err) => {
         console.log(err)
       })
+  },
+  signOut({ commit }) {
+    commit('signOut')
   }
 }

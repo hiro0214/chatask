@@ -1,8 +1,8 @@
 <template>
   <div class="task-container">
-    <ul>
-      <li v-for="task in $store.state.task.tasks" :key="task.id">{{ task.title }}</li>
-    </ul>
+      <span>{{ $store.state.user.loginUser }}</span><br>
+      <span>{{ $store.state.group.currentGroup }}</span>
+
   </div>
 
 </template>

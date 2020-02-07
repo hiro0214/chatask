@@ -1,7 +1,7 @@
 <template>
   <div class="chat-header">
     <div class="chat-header-title">
-      <span>グループ名 :  <b>{{ $store.state.group.currentGroup.group_name }}</b></span>
+      <span>グループ名 :  <b>{{ currentGroup.group_name }}</b></span>
     </div>
     <div class="chat-header-info">
       <v-menu>
@@ -17,7 +17,7 @@
         </v-list>
       </v-menu>
 
-      <v-btn icon @click="editDialog = true">
+      <v-btn icon @click="editDialogOpen" :disabled="(currentGroup.group_id) ? false : true ">
         <v-icon>library_books</v-icon>
       </v-btn>
 
@@ -26,7 +26,7 @@
           <v-card-title class="justify-center font-weight-bold">グループ編集</v-card-title>
           <v-card-text>
             <div class="edit-name">
-              <p>グループ名 : <b>メルカリチームC</b></p>
+              <p>グループ名 : <b>{{ currentGroup.group_name }}</b></p>
               <v-btn v-if="groupNameBtn == true" @click="groupNameBtn = false">グループ名を編集する</v-btn>
               <v-col v-if="groupNameBtn == false">
                 <v-text-field label="新しいグループ名" v-model="newGroupName"></v-text-field>
@@ -118,6 +118,11 @@ export default {
       this.$store.dispatch('group/groupListInit', userId)
     }, 0)
   },
+  computed: {
+    currentGroup () {
+      return this.$store.state.group.currentGroup
+    }
+  },
   methods: {
     changeGroup (group) {
       const groupData = {
@@ -129,6 +134,10 @@ export default {
     groupNameInit () {
       this.groupNameBtn = true
       this.newGroupName = ''
+    },
+    editDialogOpen () {
+      this.editDialog = true
+      this.newGroupName = this.currentGroup.group_name
     },
     editSubmit(){
       this.editDialog = false

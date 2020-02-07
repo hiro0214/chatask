@@ -77,9 +77,6 @@ export default {
     }
   },
   methods: {
-    textColor(color) {
-      console.log(color)
-    },
     scrollToEnd() {
       this.$nextTick(() => {
         const chatLog = document.getElementById('chat-main')
