@@ -8,8 +8,8 @@
     </v-card>
 
     <section>
-      <p>{{ $store.state.user.loginUser }}</p>
-      <p>{{ $store.state.group.currentGroup }}</p>
+      <!-- <p>{{ $store.state.user.loginUser }}</p>
+      <p>{{ $store.state.group.currentGroup }}</p> -->
       <v-card class="sign_up">
         <p>新規登録</p>
         <p>はじめての方はこちら</p>

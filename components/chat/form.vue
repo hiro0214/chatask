@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-form">
+  <div v-if="($store.state.group.currentGroup.group_id) ? true : false " class="chat-form">
     <form action="" ref="chat-form">
       <div class="chat-form-top">
 

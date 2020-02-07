@@ -6,7 +6,7 @@
     <div class="chat-header-info">
       <v-menu>
         <template v-slot:activator="{ on: {click} }">
-          <v-btn icon @click="click">
+          <v-btn icon @click="click" :disabled="( $store.state.group.groupList[0] ) ? false : true ">
             <v-icon>transform</v-icon>
           </v-btn>
         </template>
