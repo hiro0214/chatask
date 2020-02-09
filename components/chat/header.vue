@@ -17,9 +17,15 @@
         </v-list>
       </v-menu>
 
-      <v-btn icon @click="editDialogOpen" :disabled="(currentGroup.group_id) ? false : true ">
-        <v-icon>library_books</v-icon>
-      </v-btn>
+      <!-- グループ編集ダイアログ -->
+      <v-tooltip bottom>
+        <template v-show="false" v-slot:activator="{ on }">
+          <v-btn icon @click="editDialogOpen" :disabled="(currentGroup.group_id) ? false : true " v-on="on">
+            <v-icon>library_books</v-icon>
+          </v-btn>
+        </template>
+        <span>グループを編集</span>
+      </v-tooltip>
 
       <v-dialog v-model="editDialog" max-width="500" persistent>
         <v-card>
@@ -44,6 +50,32 @@
             </v-btn>
             <v-btn color="success" @click="editSubmit()" class="font-weight-bold">
               更新
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+      <!-- タスクダイアログ -->
+      <v-tooltip bottom>
+        <template v-show="false" v-slot:activator="{ on }">
+          <v-btn icon @click="taskDialog = true" :disabled="(currentGroup.group_id) ? false : true " v-on="on">
+            <v-icon>today</v-icon>
+          </v-btn>
+        </template>
+        <span>タスクを作成</span>
+      </v-tooltip>
+
+      <v-dialog v-model="taskDialog" max-width="500" persistent>
+        <v-card>
+          <v-card-title class="justify-center font-weight-bold">新規タスク作成</v-card-title>
+          <v-card-text>
+          </v-card-text>
+          <v-card-actions :class="`d-flex justify-center`">
+            <v-btn color="error" @click="taskClear()" class="font-weight-bold">
+              キャンセル
+            </v-btn>
+            <v-btn color="success" @click="taskCreate()" class="font-weight-bold">
+              作成
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -106,6 +138,7 @@ export default {
   data () {
     return {
       editDialog: false,
+      taskDialog: false,
       newGroupName: '',
       groupNameBtn: true,
     }
@@ -131,6 +164,8 @@ export default {
       }
       this.$store.dispatch('group/changeGroup', groupData)
     },
+
+    // グループ編集メソッド
     groupNameInit () {
       this.groupNameBtn = true
       this.newGroupName = ''
@@ -144,6 +179,14 @@ export default {
 
       // コールバック axios post
       this.groupNameInit();
+    },
+
+    // タスクメソッド
+    taskCreate () {
+      this.taskDialog = false
+    },
+    taskClear () {
+      this.taskDialog = false
     }
   }
 }
