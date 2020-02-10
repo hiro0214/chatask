@@ -23,7 +23,7 @@
           <v-menu top>
             <template v-slot:activator="{ on: {click} }">
               <v-btn icon @click="click">
-                <v-icon>create</v-icon>
+                <v-icon>colorize</v-icon>
               </v-btn>
             </template>
             <v-list class="py-0" width="70">

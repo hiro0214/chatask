@@ -1,6 +1,6 @@
 <template>
   <div class="task-container">
-    <taskMain />
+    <taskMain  v-if="currentGroup.group_id" />
   </div>
 </template>
 
@@ -21,6 +21,19 @@ import taskMain from '~/components/task/main.vue'
 export default {
   components: {
     taskMain
+  },
+  computed: {
+    currentGroup () {
+      return this.$store.state.group.currentGroup
+    }
+  },
+  watch: {
+    currentGroup(val) {
+      const groupId = {
+        group_id: val.group_id
+      }
+      this.$store.dispatch('task/init', groupId)
+    }
   }
 }
 </script>
