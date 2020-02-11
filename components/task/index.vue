@@ -1,6 +1,9 @@
 <template>
   <div class="task-container">
-    <taskMain  v-if="currentGroup.group_id" />
+    <template v-if="currentGroup.group_id">
+      <taskMain v-if="$store.state.task.taskInfo == 'taskList'" />
+      <taskShow v-if="$store.state.task.taskInfo == 'taskShow'" />
+    </template>
   </div>
 </template>
 
@@ -17,10 +20,12 @@
 
 <script>
 import taskMain from '~/components/task/main.vue'
+import taskShow from '~/components/task/show.vue'
 
 export default {
   components: {
-    taskMain
+    taskMain,
+    taskShow,
   },
   computed: {
     currentGroup () {

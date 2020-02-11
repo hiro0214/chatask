@@ -7,7 +7,7 @@
       </v-toolbar>
 
       <v-list>
-        <v-list-item v-for="(task, index) in taskList.list" :key="index" class="px-1">
+        <v-list-item v-for="(task, index) in taskList.list" :key="index" @click="taskShow(task)" class="px-1">
           <v-list-item-content class="pa-1">
             <v-card>
               <v-system-bar :class=task.label height="10"></v-system-bar>
@@ -51,6 +51,11 @@
 export default {
   data () {
     return {
+    }
+  },
+  methods: {
+    taskShow(task) {
+      this.$store.dispatch('task/show', task)
     }
   }
 }
