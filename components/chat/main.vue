@@ -25,6 +25,7 @@
     border:solid 1px gray;
     padding:20px 30px;
     overflow:scroll;
+    overflow-x: hidden;
     ul {
       list-style-type: none;
       padding:0;

@@ -27,6 +27,11 @@
     </v-card-title>
 
     <v-card-text>
+      <div class="top-info">
+        <p><v-icon>person</v-icon>作成者: {{ currentTask.creator }}</p>
+        <p><v-icon>date_range</v-icon>作成日: {{ currentTask.created_at }}</p>
+        <p v-if="currentTask.created_at !== currentTask.updated_at"><v-icon>update</v-icon>更新日: {{ currentTask.updated_at }}</p>
+      </div>
       <p><v-icon>subject</v-icon>詳細</p>
       <div v-if="taskEditInfo == false" class="detail-box">
         {{ currentTask.detail }}
@@ -35,11 +40,12 @@
         <v-textarea v-model="taskEdit.detail" />
       </div>
       <template v-if="taskEditInfo == false">
-        <p>担当者: {{ currentTask.worker }}</p>
+        <p><v-icon>group</v-icon>担当者: {{ currentTask.worker }}</p>
       </template>
       <template v-if="taskEditInfo == true">
         <v-select v-model="taskEdit.worker" :items="groupUserList" label="担当者" multiple chips persistent-hint />
       </template>
+      <p><v-icon>sync_alt</v-icon>現在の状態: {{ currentTask.state }}</p>
     </v-card-text>
 
     <v-card-actions>
@@ -57,11 +63,6 @@
         <v-spacer />
       </template>
     </v-card-actions>
-
-    <p>作成日: {{ currentTask.created_at }}</p>
-    <p>作成者: {{ currentTask.creator }}</p>
-    <p>現在の状態: {{ currentTask.state }}</p>
-
   </v-card>
 </template>
 
@@ -70,10 +71,17 @@
 .v-card {
   width:80%;
   margin:0 auto;
+  .top-info {
+    display:flex;
+    > p {
+      margin-right:20px;
+      font-size:14px;
+    }
+  }
   .detail-box {
     width:85%;
     min-height:100px;
-    margin:0 auto;
+    margin:0 auto 20px;
     padding:10px;
     border:solid 1px rgb(110, 110, 110);
   }
@@ -88,6 +96,7 @@
     margin:0 auto;
   }
 }
+
 </style>
 
 <script>
