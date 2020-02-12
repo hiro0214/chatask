@@ -10,7 +10,7 @@
         <div class="form-bottom">
           <v-card class="add-user">
             <p>ユーザーの追加</p>
-            <v-text-field label="ユーザーを検索" v-model="searchName" />
+            <v-text-field label="ユーザーIDで検索" v-model="searchId" />
             <v-list>
               <v-list-item v-for="user in $store.state.user.searchUser" :key="user.id">
                 <v-list-item-content>{{ user.name }}</v-list-item-content>
@@ -108,7 +108,7 @@ export default {
   data () {
     return {
       groupName: '',
-      searchName: '',
+      searchId: '',
       userList: [
         { user_id: this.$store.state.user.loginUser.id, user_name: this.$store.state.user.loginUser.name }
       ]
@@ -121,15 +121,15 @@ export default {
     this.$store.dispatch('user/searchClear')
   },
   watch: {
-    searchName () {
+    searchId () {
       this.inputName()
     }
   },
   methods: {
     searchUser () {
-      if (this.searchName.length > 0) {
+      if (this.searchId.length > 0) {
         const data = {
-          name: this.searchName,
+          id: this.searchId,
           current: this.$store.state.user.loginUser.id
         }
         this.$store.dispatch('user/searchUser', data)
