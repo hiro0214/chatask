@@ -23,10 +23,10 @@
           <v-card class="user-list">
             <p>現在のユーザーリスト<span>({{ userList.length }}人)</span></p>
             <v-list>
-              <v-list-item v-for="(user,index) in userList" :key="user.user_id">
+              <v-list-item v-for="(user,index) in userList" :key="index">
                 <v-list-item-content>{{ user.user_name }}</v-list-item-content>
                 <v-list-item-action>
-                  <v-btn v-if="(index == 0) ? false : true " color="error" @click="removeUser(user)">削除</v-btn>
+                  <v-btn v-if="(index == 0) ? false : true " color="error" @click="removeUser(index)">削除</v-btn>
                 </v-list-item-action>
               </v-list-item>
             </v-list>
@@ -142,6 +142,11 @@ export default {
         user_id: user.id,
         user_name: user.name
       })
+      this.searchId = ''
+      this.$store.dispatch('user/searchClear')
+    },
+    removeUser(i) {
+      this.userList.splice(i, 1)
     },
     groupCreate () {
       const data = {
