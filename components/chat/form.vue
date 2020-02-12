@@ -27,7 +27,7 @@
               </v-btn>
             </template>
             <v-list class="py-0" width="70">
-              <v-list-item v-for="(item, index) in coloritems" :key="index" @click="textColor(index)" class="px-1">
+              <v-list-item v-for="(item, index) in $store.state.chat.coloritems" :key="index" @click="textColor(index)" class="px-1">
                 <v-list-item-content :class=item></v-list-item-content>
               </v-list-item>
             </v-list>
@@ -97,8 +97,7 @@ export default {
         img: '',
         color: '',
       },
-      decoInfo: "false",
-      coloritems : ['red', 'blue', 'green', 'orange', 'purple']
+      decoInfo: "false"
     }
   },
   methods: {

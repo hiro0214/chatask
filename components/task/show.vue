@@ -43,9 +43,9 @@
         <p><v-icon>group</v-icon>担当者: {{ currentTask.worker }}</p>
       </template>
       <template v-if="taskEditInfo == true">
-        <v-select v-model="taskEdit.worker" :items="groupUserList" label="担当者" multiple chips persistent-hint />
+        <v-select v-model="taskEdit.worker" :items="$store.state.group.currentGroupUserList" label="担当者" multiple chips persistent-hint />
       </template>
-      <p><v-icon>sync_alt</v-icon>現在の状態: {{ currentTask.state }}</p>
+      <p><v-icon>local_offer</v-icon>現在の状態: {{ currentTask.state }}</p>
     </v-card-text>
 
     <v-card-actions>
@@ -108,7 +108,6 @@ export default {
       groupUserList: [
         "田中", "山田", "佐藤"
       ]
-
     }
   },
   computed: {

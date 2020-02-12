@@ -2,6 +2,7 @@ import axios from "axios"
 
 export const state = {
   currentGroup: {},
+  currentGroupUserList: [],
   groupList: []
 }
 
@@ -11,6 +12,9 @@ export const mutations = {
   },
   changeGroup(state, payload) {
     state.currentGroup = payload
+  },
+  currentGroupUserList(state, payload) {
+    state.currentGroupUserList = payload
   },
   signOut(state) {
     state.currentGroup = {}
@@ -46,6 +50,19 @@ export const actions = {
   },
   changeGroup({ commit }, payload) {
     commit('changeGroup', payload)
+  },
+  async currentGroupUserList({ commit }, payload) {
+    await axios.post('http://localhost:8000/group_user', payload)
+      .then((res) => {
+        const userList = []
+        res.data.forEach((doc) => {
+          userList.push(doc.user.name)
+        })
+        commit('currentGroupUserList', userList)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
   signOut({ commit }) {
     commit('signOut')

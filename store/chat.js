@@ -1,7 +1,8 @@
 import axios from "axios"
 
 export const state = {
-  messages: []
+  messages: [],
+  coloritems : ['red', 'blue', 'green', 'orange', 'purple']
 }
 
 export const mutations = {
